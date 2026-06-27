@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Timetables | MUT ICT</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .timetable-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .timetable-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        .timetable-card:hover {
+            transform: translateY(-4px);
+        }
+        .timetable-header {
+            background: #0055a5;
+            color: white;
+            padding: 16px 24px;
+        }
+        .timetable-header h2 {
+            margin: 0;
+            font-size: 1.6rem;
+        }
+        .timetable-header p {
+            margin: 8px 0 0;
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+        .timetable-img {
+            width: 100%;
+            display: block;
+            padding: 20px;
+            background: #f8fafc;
+            text-align: center;
+        }
+        .timetable-img img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+        .placeholder-img {
+            background: #f1f5f9;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 12px;
+            color: #64748b;
+            font-style: italic;
+        }
+        .notice {
+            background: #fff8e7;
+            border-left: 5px solid #ffaa00;
+            padding: 16px 24px;
+            margin: 20px 0;
+            border-radius: 12px;
+            font-size: 0.95rem;
+        }
+        @media (max-width: 768px) {
+            .timetable-container {
+                padding: 12px;
+            }
+            .timetable-header h2 {
+                font-size: 1.3rem;
+            }
+            .timetable-img {
+                padding: 12px;
+            }
+        }
+        footer {
+    background: #002147;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 30px;
+  }
+  
+  /* Login/logout link style */
+  .logout-link {
+      color: #ffaa00 !important;
+  }
+    </style>
+</head>
+<body>
+
+<!-- LOGIN PROTECTION SCRIPT - Added at the beginning of body -->
+<script>
+  // Check if user is logged in
+  const currentUser = sessionStorage.getItem('currentUser');
+  if (!currentUser) {
+    // Redirect to login page if not logged in
+    window.location.href = 'login.html';
+  }
+  
+  // Function to logout
+  function logoutUser() {
+    sessionStorage.removeItem('currentUser');
+    window.location.href = 'login.html';
+  }
+  
+  // Function to toggle mobile menu
+  if (typeof toggleMobileMenu !== 'function') {
+      function toggleMobileMenu() {
+          const nav = document.getElementById('navLinks');
+          if (nav) nav.classList.toggle('active');
+      }
+  }
+</script>
+
+<div id="appWrapper">
+    <!-- STICKY NAVIGATION -->
+    <div class="top-navbar">
+        <div class="logo-area">
+            <img src="https://th.bing.com/th/id/OIP.-oHPizJ9kQSFHiPZP0WC-QHaD_?w=267&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="MUT Logo">
+            <span>MUT ICT</span>
+        </div>
+        <div class="menu-toggle" onclick="toggleMobileMenu()">☰</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="#">Programs ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="Diploma in IT Extended.html">Dip IT (Extended)</a></li>
+                    <li><a href="Diploma in IT.html">Dip IT</a></li>
+                    <li><a href="Advanced Diploma in IT.html">Advanced Dip IT</a></li>
+                </ul>
+            </li>
+            <li><a href="bursaries.html">Bursaries</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="timetables.html">Timetables</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="#" onclick="logoutUser()" style="color: #ffaa00;">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="timetable-container">
+        <h1 style="color: #002147; margin-bottom: 10px; font-size: 2rem;">Class Timetables</h1>
+        <p style="margin-bottom: 30px; color: #334155;">Complete academic schedules for all ICT levels and streams.</p>
+
+        <!-- Year 1 Timetable -->
+        <div class="timetable-card">
+            <div class="timetable-header">
+                <h2>📅 First Year – IT (Extended & Core)</h2>
+                <p>2026 Academic Year | All Groups</p>
+            </div>
+            <div class="timetable-img">
+                <img src="pictures/Year1 Time table.jpeg" alt="Year 1 Timetable" onerror="this.onerror=null; this.src='https://placehold.co/800x400?text=Year+1+Timetable+Not+Found';">
+            </div>
+        </div>
+
+
+        <!-- Year 2 CN Timetable -->
+        <div class="timetable-card">
+            <div class="timetable-header">
+                <h2>📘 Year 2 – Communication Networks (CN)</h2>
+                <p>Effective: 2 February 2026 | Version 1.0</p>
+            </div>
+            <div class="timetable-img">
+                <img src="pictures/Year2 CN.jpeg" alt="Year 2 CN Timetable" onerror="this.onerror=null; this.src='https://placehold.co/800x400?text=Year+2+CN+Timetable+Not+Found';">
+            </div>
+        </div>
+
+        <!-- Year 3 CN Timetable -->
+        <div class="timetable-card">
+            <div class="timetable-header">
+                <h2>📙 Year 3 – Communication Networks (CN)</h2>
+                <p>Effective: 2 February 2026 | Advanced modules</p>
+            </div>
+            <div class="timetable-img">
+                <img src="pictures/Year3 CN.jpeg" alt="Year 3 CN Timetable" onerror="this.onerror=null; this.src='https://placehold.co/800x400?text=Year+3+CN+Timetable+Not+Found';">
+            </div>
+        </div>
+        
+         <!-- Year 2 SD Timetable (MISSING - placeholder) -->
+        <div class="timetable-card">
+            <div class="timetable-header">
+                <h2>💻 Year 2 – Software Development (SD)</h2>
+                <p>Mainstream IT | Annual</p>
+            </div>
+            <div class="timetable-img">
+                <div class="placeholder-img">
+                    ⏳ Year 2 General IT Timetable Not Yet Uploaded<br>
+                    <small>Please check back soon or contact the department.</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Year 3 Software Development Timetable (NEW - image provided) -->
+        <div class="timetable-card">
+            <div class="timetable-header">
+                <h2>💻 Year 3 – Software Development (SD)</h2>
+                <p>Advanced programming & development modules | Effective: 2 Feb 2026</p>
+            </div>
+            <div class="timetable-img">
+                <img src="pictures/Year3 SD.jpeg" alt="Year 3 Software Development Timetable" onerror="this.onerror=null; this.src='https://placehold.co/800x400?text=Year+3+SD+Timetable+Not+Found';">
+            </div>
+        </div>
+
+        <div class="notice">
+            <strong>⚠️ Important Notice:</strong> Timetables are subject to change. Missing timetables (Year 2 General IT) will be added as soon as they are available. For any urgent queries, email <a href="mailto:ict@mut.ac.za">ict@mut.ac.za</a>.
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    
+ <!-- Footer -->
+<footer>
+  <p>© 2026 MUT ICT Department | All Rights Reserved</p>
+  <div style="text-align: center; margin-top: 20px;">
+    <button onclick="toggleMobileView()" class="view-toggle-btn" style="background: #0055a5; color: white; border: none; padding: 10px 20px; border-radius: 40px; cursor: pointer; font-size: 14px;">
+        📱 Switch to Mobile View
+    </button>
+</div>
+</div>
+</footer>
+<script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="auth.js"></script>
+<script>
+    if (typeof toggleMobileMenu !== 'function') {
+        function toggleMobileMenu() {
+            const nav = document.getElementById('navLinks');
+            if (nav) nav.classList.toggle('active');
+        }
+    }
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                document.getElementById('navLinks')?.classList.remove('active');
+            }
+        });
+    });
+</script>
+ 
+
+<script src="script.js"></script>
+<script>
+    // Check if toggleMobileMenu is already defined (it is now defined above)
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                document.getElementById('navLinks')?.classList.remove('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>

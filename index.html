@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>MUT ICT Department | Home</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Tesseract.js for OCR text extraction from images (added for chatbot image processing) -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body>
+
+<div id="appWrapper">
+    <!-- ========== UNIFIED STICKY NAVIGATION ========== -->
+    <div class="top-navbar">
+        <div class="logo-area">
+            <img src="https://th.bing.com/th/id/OIP.-oHPizJ9kQSFHiPZP0WC-QHaD_?w=267&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="MUT Logo">
+            <span>MUT ICT</span>
+        </div>
+        <div class="menu-toggle" onclick="toggleMobileMenu()">☰</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="#">Programs ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="Diploma in IT Extended.html">Dip IT (Extended)</a></li>
+                    <li><a href="Diploma in IT.html">Dip IT</a></li>
+                    <li><a href="Advanced Diploma in IT.html">Advanced Dip IT</a></li>
+                </ul>
+            </li>
+            <li><a href="bursaries.html">Bursaries</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="timetables.html">Timetables</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><button id="authBtn" class="logout-btn" onclick="window.location.href='login.html'" style="background-color: rgba(210, 181, 16, 0.912); color: blue; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 18px;">Login</button></li>
+        </ul>
+    </div>
+
+    <!-- ========== HERO SECTION (background + cards) ========== -->
+    <div class="hero">
+        <div class="hero-welcome">
+            <h1>Welcome to ICT Department</h1>
+            <p>Quality education in IT & Computer Systems</p>
+        </div>
+        
+        <!-- ========== SEARCH BAR ========== -->
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" id="globalSearch" placeholder="Search for events, timetables, bursaries, programs..." autocomplete="off">
+                <button id="searchBtn" class="search-btn">🔍</button>
+            </div>
+            <div id="searchMessage" class="search-message"></div>
+        </div>
+        
+        <div class="banner-content">
+            <p>Innovate. Learn. Excel.</p>
+            <a href="#programs-cards" class="btn">Explore Programs</a>
+        </div>
+        <div class="cards-section-hero" id="programs-cards">
+            <div class="card-overlay">
+                <h3>Diploma in IT Extended</h3>
+                <p>4-year extended program with strong foundation and core IT modules.</p>
+                <a href="Diploma in IT Extended.html" class="card-btn">Learn More →</a>
+            </div>
+            <div class="card-overlay">
+                <h3>Diploma in IT</h3>
+                <p>3-year industry-focused: software, networking, databases, development.</p>
+                <a href="Diploma in IT.html" class="card-btn">Learn More →</a>
+            </div>
+            <div class="card-overlay">
+                <h3>Advanced Diploma in IT</h3>
+                <p>Cybersecurity, ethical hacking, digital forensics & risk management.</p>
+                <a href="Advanced Diploma in IT.html" class="card-btn">Learn More →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div>
+                <h4>Quick Links</h4>
+                <nav>
+                    <a href="bursaries.html">Bursaries</a> | 
+                    <a href="events.html">Events</a> | 
+                    <a href="timetables.html">Timetables</a>
+                </nav>
+                <p style="margin-top: 20px;">© 2026 MUT | ICT Department</p>
+            </div>
+            <div>
+                <h4>Staff</h4>
+                <p>Dr. John Doe – Head of Department</p>
+                <p>Ms. Jane Smith – Lecturer</p>
+                <p>Mr. Sipho Nkosi – Lab Coordinator</p>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <p>Email: <a href="mailto:ict@mut.ac.za" style="color:#b8e1ff;">ict@mut.ac.za</a></p>
+                <p>Phone: <a href="tel:+273112345678" style="color:#b8e1ff;">+27 31 123 45678</a></p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="view-toggle-btn" onclick="toggleMobileView()">📱 Switch to Mobile View</button>
+        </div>
+    </footer>
+
+    <!-- ========== FLOATING FAQ & CHATBOT ========== -->
+    <div class="faq-icon" onclick="toggleFAQ()">❓</div>
+    <div class="faq-popup" id="faqPopup">
+        <h3 style="color:#002147;">FAQs</h3>
+        <button class="faq-question">How do I apply?</button>
+        <div class="faq-answer"><p>Applications via CAO platform. Check MUT website deadlines.</p></div>
+        <button class="faq-question">Available bursaries?</button>
+        <div class="faq-answer"><p>NSFAS, Merit Bursaries, Motsepe Foundation, INSETA sponsorships.</p></div>
+        <button class="faq-question">Where are timetables?</button>
+        <div class="faq-answer"><p>See 'Timetables' page for Year 1-3 class schedules.</p></div>
+        <button class="faq-question">ICT support contact?</button>
+        <div class="faq-answer"><p>ict@mut.ac.za | +27 31 123 45678</p></div>
+    </div>
+    <div class="chatbot-icon" id="chatbotIconBtn">💬</div>
+    <div class="chatbot-box" id="chatbotBox">
+        <div class="chatbot-header">
+            <h3>🤖 MUT ICT Assistant (Vision + OCR)</h3>
+            <button id="closeChatbotBtn">✖</button>
+        </div>
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="bot-message">Hi! I'm Siri how can I assist</div>
+        </div>
+        <div class="chatbot-input-area">
+            <input type="text" id="userInput" placeholder="Ask a question or describe what to extract from image...">
+            <button id="sendMsgBtn">Send</button>
+            <button id="voiceBtn">🎤</button>
+            <button id="imageUploadBtn" class="image-upload-btn" title="Upload Image for Text Reading">🖼️</button>
+             <button id="docUploadBtn" class="doc-upload-btn" title="Upload Document (PDF/DOCX/TXT)">📄</button>
+            <input type="file" id="fileInputUniversal" accept=".pdf,.docx,.txt,image/*" style="display: none;">
+
+            <!-- Add these script tags for document parsing libraries -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/mammoth@1.4.2/mammoth.browser.min.js"></script>
+
+            <script>
+            (function() {
+                // Get references to DOM elements (adjust IDs to match your existing chatbot)
+                const docUploadBtn = document.getElementById('docUploadBtn');
+                const universalFileInput = document.getElementById('fileInputUniversal');
+                const chatMessages = document.getElementById('chatMessages');
+                const ocrStatusDiv = document.getElementById('ocrStatus');
+                
+                // State for extracted text from documents
+                let currentExtractedText = "";
+                
+                // Helper to add messages to chat
+                function addMessage(text, sender, previewData = null) {
+                    const msgDiv = document.createElement('div');
+                    msgDiv.className = sender === 'user' ? 'user-message' : 'bot-message';
+                    
+                    if (previewData && sender === 'user') {
+                        const textSpan = document.createElement('span');
+                        textSpan.innerText = text;
+                        msgDiv.appendChild(textSpan);
+                        if (previewData.type === 'doc') {
+                            const badge = document.createElement('div');
+                            badge.style.background = '#e2e8f0';
+                            badge.style.borderRadius = '20px';
+                            badge.style.padding = '4px 8px';
+                            badge.style.fontSize = '0.7rem';
+                            badge.style.display = 'inline-flex';
+                            badge.style.alignItems = 'center';
+                            badge.style.gap = '4px';
+                            badge.innerHTML = `📄 ${previewData.name} (${previewData.sizeKB} KB)`;
+                            msgDiv.appendChild(badge);
+                        }
+                    } else {
+                        msgDiv.innerText = text;
+                    }
+                    chatMessages.appendChild(msgDiv);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+    
+                function updateStatus(text, isError = false) {
+                    if (ocrStatusDiv) {
+                        ocrStatusDiv.innerHTML = text;
+                        ocrStatusDiv.style.color = isError ? '#b91c1c' : '#2c5282';
+                    }
+                }
+                
+                // PDF extraction using pdf.js
+                async function extractFromPDF(file) {
+                    updateStatus("📄 Reading PDF document...");
+                    try {
+                        const arrayBuffer = await file.arrayBuffer();
+                        const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+                        const pdf = await loadingTask.promise;
+                        let fullText = "";
+                        for (let i = 1; i <= pdf.numPages; i++) {
+                            const page = await pdf.getPage(i);
+                            const content = await page.getTextContent();
+                            const pageText = content.items.map(item => item.str).join(' ');
+                            fullText += pageText + "\n";
+                        }
+                        if (fullText.trim().length === 0) {
+                            updateStatus("⚠️ No text found in PDF (may be scanned).");
+                            return "";
+                        }
+                        updateStatus(`✅ PDF extracted: ${fullText.length} characters`);
+                        return fullText;
+                    } catch(err) {
+                        console.error(err);
+                        updateStatus("❌ PDF reading failed", true);
+                        return "";
+                    }
+                }
+                
+                // DOCX extraction using mammoth.js
+                async function extractFromDOCX(file) {
+                    updateStatus("📝 Reading Word document...");
+                    try {
+                        const arrayBuffer = await file.arrayBuffer();
+                        const result = await mammoth.extractRawText({ arrayBuffer: arrayBuffer });
+                        const text = result.value;
+                        if (!text || text.trim().length === 0) {
+                            updateStatus("⚠️ No text found in document");
+                            return "";
+                        }
+                        updateStatus(`✅ DOCX extracted: ${text.length} characters`);
+                        return text;
+                    } catch(err) {
+                        console.error(err);
+                        updateStatus("❌ DOCX reading failed", true);
+                        return "";
+                    }
+                }
+                
+                // TXT file extraction
+                async function extractFromTXT(file) {
+                    updateStatus("📄 Reading text file...");
+                    return new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            const text = e.target.result;
+                            if (text.trim().length === 0) {
+                                resolve("");
+                            } else {
+                                updateStatus(`✅ TXT loaded: ${text.length} characters`);
+                                resolve(text);
+                            }
+                        };
+                        reader.onerror = () => {
+                            updateStatus("❌ Error reading text file", true);
+                            resolve("");
+                        };
+                        reader.readAsText(file, "UTF-8");
+                    });
+                }
+                
+                // Main document handler
+                async function handleDocumentUpload(file) {
+                    if (!file) return;
+                    
+                    const fileName = file.name;
+                    const fileExt = fileName.split('.').pop().toLowerCase();
+                    let extractedText = "";
+                    
+                    // Show user uploaded file preview
+                    const previewInfo = { 
+                        type: 'doc', 
+                        name: fileName, 
+                        sizeKB: (file.size / 1024).toFixed(1) 
+                    };
+                    addMessage(`📎 Uploaded: ${fileName}`, 'user', previewInfo);
+                    
+                    // Extract based on file type
+                    if (fileExt === 'pdf') {
+                        extractedText = await extractFromPDF(file);
+                    } else if (fileExt === 'docx') {
+                        extractedText = await extractFromDOCX(file);
+                    } else if (fileExt === 'txt') {
+                        extractedText = await extractFromTXT(file);
+                    } else {
+                        addMessage(`❌ Unsupported format: ${fileExt}. Please upload PDF, DOCX, or TXT.`, 'bot');
+                        updateStatus("Unsupported format", true);
+                        return;
+                    }
+                    
+                    // Store and confirm extraction
+                    if (extractedText && extractedText.trim().length > 0) {
+                        currentExtractedText = extractedText;
+                        const preview = extractedText.length > 400 
+                            ? extractedText.substring(0, 400) + "..." 
+                            : extractedText;
+                        
+                        addMessage(`✅ **Document processed:** ${fileName}\n\n📝 Extracted text (${extractedText.length} chars):\n"${preview}"\n\nNow ask me questions about this document (summarize, find keywords, extract dates, etc.)`, 'bot');
+                        updateStatus(`✅ Ready: ${fileName} — ${extractedText.length} characters extracted`);
+                    } else {
+                        currentExtractedText = "";
+                        addMessage(`⚠️ Could not extract readable text from ${fileName}. Try a different file.`, 'bot');
+                        updateStatus(`⚠️ No text extracted`, true);
+                    }
+                }
+                
+                // Clear document memory (optional command)
+                function clearDocumentMemory() {
+                    currentExtractedText = "";
+                    updateStatus("🧹 Document memory cleared. Upload a new file.");
+                    addMessage("🗑️ Previous document text has been cleared.", 'bot');
+                }
+                
+                // Setup event listeners
+                if (docUploadBtn && universalFileInput) {
+                    docUploadBtn.addEventListener('click', () => {
+                        universalFileInput.accept = ".pdf,.docx,.txt";
+                        universalFileInput.click();
+                    });
+                    
+                    universalFileInput.addEventListener('change', async (e) => {
+                        if (e.target.files && e.target.files[0]) {
+                            await handleDocumentUpload(e.target.files[0]);
+                            universalFileInput.value = '';
+                        }
+                    });
+                }
+                
+                // Expose functions globally for integration with your existing chatbot
+                window.getExtractedDocumentText = () => currentExtractedText;
+                window.clearDocumentMemory = clearDocumentMemory;
+                window.handleDocumentUpload = handleDocumentUpload;
+            })();
+            </script>
+
+            <style>
+                /* Style for the new document upload button */
+                .doc-upload-btn {
+                    background: #2c5f8a;
+                    border: none;
+                    color: white;
+                    padding: 8px 12px;
+                    border-radius: 30px;
+                    cursor: pointer;
+                    font-size: 1.1rem;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .doc-upload-btn:hover {
+                    background: #1e4663;
+                }
+            </style>   
+                        <input type="file" id="imageFileInput" accept="image/*" style="display: none;">
+                    </div>
+                    <div id="ocrStatus" style="padding: 4px 12px 8px 12px; font-size:0.7rem; color:#2c5282; display: flex; align-items: center; gap: 6px;"></div>
+                </div>
+</div>
+
+<!-- Preserve all original scripts -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="auth.js"></script>
+<script src="script.js"></script>
+
+<!-- Enhanced Chatbot with Image Processing (keeping all existing code intact) -->
+<script>
+    (function() {
+        // Wait for DOM to be fully loaded to avoid conflicts with existing script.js
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initImageChatbot);
+        } else {
+            initImageChatbot();
+        }
+
+        function initImageChatbot() {
+            // Reference DOM elements
+            const chatMessages = document.getElementById('chatMessages');
+            const userInput = document.getElementById('userInput');
+            const sendBtn = document.getElementById('sendMsgBtn');
+            const voiceBtn = document.getElementById('voiceBtn');
+            const imageUploadBtn = document.getElementById('imageUploadBtn');
+            const imageFileInput = document.getElementById('imageFileInput');
+            const ocrStatusDiv = document.getElementById('ocrStatus');
+
+            if (!chatMessages) return;
+
+            // State for OCR: store last extracted text and image URL
+            let lastExtractedText = "";
+            let lastImageUrl = "";
+
+            // Helper: Add message to chat (preserving original style)
+            function addMessage(message, sender, imageUrl = null) {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = sender === 'user' ? 'user-message' : 'bot-message';
+                
+                if (imageUrl && sender === 'user') {
+                    // Show user uploaded image preview inside the bubble (non-intrusive)
+                    const textSpan = document.createElement('span');
+                    textSpan.innerText = message;
+                    msgDiv.appendChild(textSpan);
+                    const img = document.createElement('img');
+                    img.src = imageUrl;
+                    img.style.maxWidth = '120px';
+                    img.style.borderRadius = '10px';
+                    img.style.marginTop = '8px';
+                    img.style.border = '1px solid #ccc';
+                    msgDiv.appendChild(document.createElement('br'));
+                    msgDiv.appendChild(img);
+                } else {
+                    msgDiv.innerText = message;
+                }
+                chatMessages.appendChild(msgDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            // OCR function: extract text from image file using Tesseract.js
+            async function extractTextFromImage(file) {
+                return new Promise((resolve, reject) => {
+                    if (!file) reject("No file provided");
+                    const reader = new FileReader();
+                    reader.onload = async function(e) {
+                        const imageDataUrl = e.target.result;
+                        lastImageUrl = imageDataUrl;
+                        if (ocrStatusDiv) ocrStatusDiv.innerHTML = "🔍 Processing image with OCR... please wait";
+                        try {
+                            const { data: { text } } = await Tesseract.recognize(
+                                imageDataUrl,
+                                'eng',
+                                { logger: m => console.log(m) }
+                            );
+                            const cleanedText = text.trim();
+                            if (cleanedText.length === 0) {
+                                if (ocrStatusDiv) ocrStatusDiv.innerHTML = "⚠️ No text detected in image. Try a clearer picture.";
+                                resolve({ text: "", imageUrl: imageDataUrl, warning: true });
+                            } else {
+                                if (ocrStatusDiv) ocrStatusDiv.innerHTML = "✅ Text extracted! Ask me anything about the image.";
+                                resolve({ text: cleanedText, imageUrl: imageDataUrl, warning: false });
+                            }
+                        } catch (err) {
+                            console.error("OCR error", err);
+                            if (ocrStatusDiv) ocrStatusDiv.innerHTML = "❌ OCR failed. Error: " + err.message;
+                            reject(err);
+                        }
+                    };
+                    reader.onerror = () => reject("Failed to read image");
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            // Smart bot reply that can incorporate extracted text and user query (preserves original logic + image intelligence)
+            async function getSmartBotReply(userMessage, extractedImageText = null) {
+                let lowerMsg = userMessage.toLowerCase();
+                
+                // If there is extracted text from image, prioritize answering about that content
+                if (extractedImageText && extractedImageText.length > 0) {
+                    // User asks for summary or about the image
+                    if (lowerMsg.includes("summarize") || lowerMsg.includes("what does") || lowerMsg.includes("tell me about") || lowerMsg.includes("extract") || lowerMsg.includes("read") || lowerMsg.includes("image") || lowerMsg.includes("picture") || lowerMsg.includes("says")) {
+                        let summary = extractedImageText.length > 450 ? extractedImageText.substring(0, 450) + "..." : extractedImageText;
+                        return `📸 I read the following text from your image:\n\n${summary}\n\nYou can ask me specific questions like "list dates", "show deadlines", or "what are the requirements?" based on this content.`;
+                    }
+                    
+                    // If user asks a specific question, search for relevant lines in extracted text
+                    const keywords = userMessage.split(/\s+/).filter(w => w.length > 3);
+                    const lines = extractedImageText.split(/\r?\n/);
+                    let relevantLines = [];
+                    for (let line of lines) {
+                        let lowerLine = line.toLowerCase();
+                        if (keywords.some(kw => lowerLine.includes(kw.toLowerCase()))) {
+                            relevantLines.push(line.trim());
+                        }
+                    }
+                    if (relevantLines.length > 0) {
+                        return `🔎 Based on the image text, here is relevant information:\n${relevantLines.slice(0, 6).join("\n")}\n\nAsk me for more details from the image.`;
+                    } else {
+                        // Provide extracted context but allow follow-up
+                        return `📷 I've read the uploaded image. Here's the main content:\n\n${extractedImageText.substring(0, 500)}${extractedImageText.length > 500 ? "..." : ""}\n\nWhat specific information would you like to know from this image?`;
+                    }
+                }
+                
+                // ORIGINAL CHATBOT LOGIC (preserved from your script.js) with minor enhancements
+                if (lowerMsg.includes('apply') || lowerMsg.includes('cao')) return "Applications are done through the CAO system. Visit www.cao.ac.za for MUT applications.";
+                if (lowerMsg.includes('bursary') || lowerMsg.includes('bursaries')) return "Check the Bursaries page for NSFAS, Merit Bursaries, Motsepe Foundation, and INSETA sponsorships.";
+                if (lowerMsg.includes('requirements') || lowerMsg.includes('points')) return "Entry requirements differ per program: For Dip IT Extended: English L3, Maths L2 or Maths Lit L3. For Dip IT: Maths L3 or Maths Lit L5, English L3. Advanced Diploma requires relevant NQF6 qualification.";
+                if (lowerMsg.includes('timetable')) return "Visit the Timetables page (link in navigation) to see Year1, Year2 CN, Year3 CN & SD schedules.";
+                if (lowerMsg.includes('event')) return "Upcoming events: Registration (Jan), Freshers Party (Feb), Tech Innovation Day (Mar), Career Fair (June), Hackathon (Aug), Graduation (Nov).";
+                if (lowerMsg.includes('hello') || lowerMsg.includes('hi')) return "Hello! I'm your intelligent assistant. You can upload an image (timetable, flyer, text screenshot) and I'll extract and answer based on it. How can I help you today?";
+                if (lowerMsg.includes('contact') || lowerMsg.includes('email')) return "ICT Department email: ict@mut.ac.za | Phone: +27 31 123 45678";
+                if (lowerMsg.includes('advanced diploma') || lowerMsg.includes('cyber')) return "Advanced Diploma in IT focuses on Cybersecurity, Ethical Hacking, Digital Forensics, Risk Management. Duration: 1 year full-time. Entry: NQF level 6 IT-related qualification.";
+                if (lowerMsg.includes('diploma in it extended')) return "Dip IT Extended is a 4-year program for students needing foundation. Covers programming, networking, databases. Entry: 50% in three fundamental subjects including English, 60% in three vocational subjects.";
+                if (lowerMsg.includes('software') || lowerMsg.includes('developer')) return "Software Development is part of mainstream IT. We offer practical labs in Java, Python, and web development. Career paths: Software Developer, Systems Analyst.";
+                if (lowerMsg.includes('network') || lowerMsg.includes('cn')) return "Communication Networks specialisation prepares you for roles like Network Engineer, Security Administrator. Check timetables for Year2 CN and Year3 CN.";
+                
+                return "📌 Please upload an image (timetable, notice, or document) and ask a question like 'What deadlines appear?' or just ask general MUT ICT info. You can also ask about applications, bursaries, events, and programs!";
+            }
+
+            // Main message handler with OCR integration (doesn't interfere with original script)
+            async function handleUserMessage(userText) {
+                if (!userText.trim()) return;
+                // Show user message
+                addMessage(userText, 'user', null);
+                
+                let activeExtractedText = lastExtractedText;
+                const reply = await getSmartBotReply(userText, activeExtractedText);
+                addMessage(reply, 'bot');
+            }
+
+            // Process image upload: perform OCR and store text
+            async function onImageSelected(file) {
+                if (!file) return;
+                // Show user preview
+                const readerPreview = new FileReader();
+                readerPreview.onload = async (e) => {
+                    const previewUrl = e.target.result;
+                    addMessage("📷 Uploaded image for text extraction:", 'user', previewUrl);
+                    try {
+                        const ocrResult = await extractTextFromImage(file);
+                        if (ocrResult.text && ocrResult.text.length > 0) {
+                            lastExtractedText = ocrResult.text;
+                            let confirmationMsg = `🖼️ I've successfully read ${lastExtractedText.length} characters from your image.\n\n`;
+                            if (lastExtractedText.length > 350) {
+                                confirmationMsg += `Preview: "${lastExtractedText.substring(0, 280)}..."\n\nNow ask any specific question about this image content.`;
+                            } else {
+                                confirmationMsg += `Extracted content: "${lastExtractedText}"\n\nAsk me a question about this text.`;
+                            }
+                            addMessage(confirmationMsg, 'bot');
+                            if (ocrStatusDiv) ocrStatusDiv.innerHTML = `✅ OCR ready. ${lastExtractedText.length} characters extracted. Ask about the image!`;
+                        } else {
+                            lastExtractedText = "";
+                            addMessage("⚠️ No readable text found in this image. Please try a cleaner picture with darker text on light background.", 'bot');
+                            if (ocrStatusDiv) ocrStatusDiv.innerHTML = "❌ No text detected. Try a clearer document or screenshot.";
+                        }
+                    } catch (err) {
+                        console.error(err);
+                        addMessage("Sorry, image processing failed. Please try another image.", 'bot');
+                        if (ocrStatusDiv) ocrStatusDiv.innerHTML = "❌ OCR error. Try again with a different image.";
+                        lastExtractedText = "";
+                    }
+                };
+                readerPreview.readAsDataURL(file);
+            }
+
+            // Clear OCR memory command helper
+            function clearOcrMemory() {
+                lastExtractedText = "";
+                lastImageUrl = "";
+                if (ocrStatusDiv) ocrStatusDiv.innerHTML = "🧹 OCR memory cleared. Upload a new image to analyze.";
+                addMessage("🗑️ Previous image text has been cleared. You can upload a new picture for text extraction.", 'bot');
+            }
+
+            // Voice recognition (Web Speech API) preserved from your original enhanced idea
+            function setupVoiceRecognition() {
+                if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                    if (voiceBtn) voiceBtn.style.opacity = '0.5';
+                    return;
+                }
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                const recognition = new SpeechRecognition();
+                recognition.continuous = false;
+                recognition.lang = 'en-US';
+                recognition.interimResults = false;
+                if (voiceBtn) {
+                    voiceBtn.addEventListener('click', () => {
+                        recognition.start();
+                        voiceBtn.textContent = "🎙️";
+                        voiceBtn.style.background = "#28a745";
+                    });
+                }
+                recognition.onresult = (event) => {
+                    const transcript = event.results[0][0].transcript;
+                    if (userInput) userInput.value = transcript;
+                    if (voiceBtn) {
+                        voiceBtn.textContent = "🎤";
+                        voiceBtn.style.background = "#0055a5";
+                    }
+                    if (transcript.trim()) {
+                        handleUserMessage(transcript);
+                        if (userInput) userInput.value = "";
+                    }
+                };
+                recognition.onerror = () => {
+                    if (voiceBtn) {
+                        voiceBtn.textContent = "🎤";
+                        voiceBtn.style.background = "#0055a5";
+                    }
+                    addMessage("Voice recognition error. Please try typing.", 'bot');
+                };
+                recognition.onend = () => {
+                    if (voiceBtn) {
+                        voiceBtn.textContent = "🎤";
+                        voiceBtn.style.background = "#0055a5";
+                    }
+                };
+            }
+
+            // Initialize all event listeners without disrupting existing ones
+            if (sendBtn) {
+                // Remove any previous listener to avoid double invocation, but we preserve original script's functionality by not replacing global handlers
+                const newSendBtn = sendBtn.cloneNode(true);
+                sendBtn.parentNode.replaceChild(newSendBtn, sendBtn);
+                newSendBtn.addEventListener('click', () => {
+                    const msg = userInput ? userInput.value.trim() : "";
+                    if (msg) {
+                        handleUserMessage(msg);
+                        if (userInput) userInput.value = "";
+                    } else if (lastExtractedText && lastExtractedText.length > 0) {
+                        addMessage("You have an image with extracted text. Ask something like 'summarize the image' or 'find deadlines'.", 'bot');
+                    } else {
+                        addMessage("Please type a question or upload an image (timetable, notice) with text for me to read.", 'bot');
+                    }
+                });
+            }
+            
+            if (userInput) {
+                // Preserve keypress but avoid duplicate listeners
+                userInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        const msg = userInput.value.trim();
+                        if (msg) {
+                            handleUserMessage(msg);
+                            userInput.value = "";
+                        }
+                    }
+                });
+            }
+            
+            if (imageUploadBtn && imageFileInput) {
+                imageUploadBtn.addEventListener('click', () => {
+                    imageFileInput.click();
+                });
+                imageFileInput.addEventListener('change', (e) => {
+                    if (e.target.files && e.target.files[0]) {
+                        const file = e.target.files[0];
+                        if (file.type.startsWith('image/')) {
+                            onImageSelected(file);
+                        } else {
+                            addMessage("Please select a valid image file (JPEG, PNG, etc.).", 'bot');
+                        }
+                        imageFileInput.value = '';
+                    }
+                });
+            }
+            
+            setupVoiceRecognition();
+            
+            // Add command to clear image memory if user types "clear image" or "reset ocr"
+            const originalHandle = handleUserMessage;
+            window.imageChatbotClear = clearOcrMemory;
+            // Override to support clear commands but keep everything intact
+            window.handleUserMessageWithClear = async (text) => {
+                const lower = text.toLowerCase();
+                if (lower.includes("clear image") || lower.includes("reset ocr") || lower.includes("forget image")) {
+                    clearOcrMemory();
+                    return;
+                }
+                return originalHandle(text);
+            };
+            // Replace handler with wrapper
+            window.handleUserMessage = window.handleUserMessageWithClear;
+            // Reassign for local usage
+            const finalHandler = window.handleUserMessageWithClear;
+            // Update send button to use final handler
+            if (sendBtn && sendBtn.parentNode) {
+                // Already done above but ensure consistency
+            }
+        }
+    })();
+</script>
+
+<style>
+    /* Additional CSS for image upload button and OCR status */
+    .chatbot-input-area {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .image-upload-btn {
+        background: #4a6fa5;
+        border: none;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .image-upload-btn:hover {
+        background: #2c4c7c;
+    }
+    #voiceBtn {
+        background: #0055a5;
+        border: none;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 30px;
+        cursor: pointer;
+    }
+    #voiceBtn:hover {
+        background: #003f7d;
+    }
+    #sendMsgBtn {
+        background: #0055a5;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 30px;
+        cursor: pointer;
+    }
+    .ocr-status {
+        font-size: 0.7rem;
+    }
+    .user-message img {
+        max-width: 120px;
+        border-radius: 10px;
+        margin-top: 6px;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+  
+<!-- Preserve all original scripts -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="auth.js"></script>
+<script src="script.js"></script>
+<!-- Enhanced Chatbot with Image Processing (keeping all existing code intact) -->
+
+
+<!-- ========== SCRIPTS ========== -->
+<script src="script.js"></script>
+
+<!-- Search JavaScript -->
+<script>
+// Search Pages Database
+const searchPages = [
+    { url: "events.html", keywords: ["event", "events", "hackathon", "career", "graduation", "freshers"] },
+    { url: "timetables.html", keywords: ["timetable", "schedule", "class", "time", "timetables"] },
+    { url: "bursaries.html", keywords: ["bursary", "funding", "nsfas", "money", "financial", "bursaries"] },
+    { url: "Diploma in IT Extended.html", keywords: ["extended", "diploma extended", "4 year", "it extended"] },
+    { url: "Diploma in IT.html", keywords: ["diploma", "it", "3 year", "diploma in it"] },
+    { url: "Advanced Diploma in IT.html", keywords: ["advanced", "cybersecurity", "hacking", "security", "advanced diploma"] },
+    { url: "login.html", keywords: ["login", "sign in", "log in"] },
+    { url: "signup.html", keywords: ["signup", "register", "create account", "sign up"] }
+];
+
+function searchAndRedirect() {
+    const query = document.getElementById('globalSearch').value.toLowerCase().trim();
+    const messageDiv = document.getElementById('searchMessage');
+    
+    if (!query) return;
+    
+    let foundPage = null;
+    
+    for (let page of searchPages) {
+        if (page.keywords.some(keyword => keyword.includes(query) || query.includes(keyword))) {
+            foundPage = page;
+            break;
+        }
+    }
+    
+    if (foundPage) {
+        messageDiv.classList.remove('show');
+        window.location.href = foundPage.url;
+    } else {
+        messageDiv.textContent = "❌ Information you are looking for is not found";
+        messageDiv.classList.add('show');
+        setTimeout(() => {
+            messageDiv.classList.remove('show');
+        }, 3000);
+    }
+}
+
+// Event listeners for search
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('globalSearch');
+    const searchBtn = document.getElementById('searchBtn');
+    
+    if (searchBtn) {
+        searchBtn.addEventListener('click', searchAndRedirect);
+    }
+    
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                searchAndRedirect();
+            }
+        });
+    }
+});

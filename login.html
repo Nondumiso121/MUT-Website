@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | MUT ICT Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .bg-animation .circle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        .bg-animation .circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            left: -100px;
+            animation-duration: 25s;
+        }
+
+        .bg-animation .circle:nth-child(2) {
+            width: 500px;
+            height: 500px;
+            bottom: -200px;
+            right: -100px;
+            animation-duration: 35s;
+        }
+
+        .bg-animation .circle:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            animation-duration: 20s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-100px) rotate(180deg); }
+        }
+
+        /* Navigation */
+        .top-navbar {
+            background: rgba(0, 33, 71, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-area img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ffd700;
+        }
+
+        .logo-area span {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: #ffd700;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* Main Container */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            overflow: hidden;
+            width: 100%;
+            max-width: 520px;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .auth-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .auth-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .auth-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .auth-tabs {
+            display: flex;
+            border-bottom: 2px solid #eee;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #666;
+        }
+
+        .tab-btn.active {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .auth-form {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .form-group label i {
+            color: #667eea;
+            margin-right: 8px;
+            width: 20px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            color: #27ae60;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #333;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            z-index: 3000;
+            animation: slideInRight 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast.success {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+
+        .toast.error {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .toast i {
+            font-size: 20px;
+        }
+
+        footer {
+            background: #002147;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            position: relative;
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .top-navbar {
+                padding: 15px 20px;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                padding: 20px 0;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .dropdown-menu {
+                position: static !important;
+                padding-left: 20px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .auth-container {
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-animation">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+</div>
+
+<div id="app">
+    <!-- Navigation -->
+    <div class="top-navbar">
+        <div class="logo-area">
+            <img src="https://th.bing.com/th/id/OIP.-oHPizJ9kQSFHiPZP0WC-QHaD_?w=267&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="MUT Logo">
+            <span>MUT ICT</span>
+        </div>
+        <div class="menu-toggle" onclick="toggleMobileMenu()">☰</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li class="dropdown">
+                <a href="#">Programs ▾</a>
+                <ul class="dropdown-menu" style="display:none; position:absolute; background:#002147; list-style:none; padding:10px; border-radius:8px;">
+                    <li><a href="Diploma in IT Extended.html">Dip IT (Extended)</a></li>
+                    <li><a href="Diploma in IT.html">Dip IT</a></li>
+                    <li><a href="Advanced Diploma in IT.html">Advanced Dip IT</a></li>
+                </ul>
+            </li>
+            <li><a href="bursaries.html">Bursaries</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="timetables.html">Timetables</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Auth Container -->
+    <div class="main-container">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h1><i class="fas fa-graduation-cap"></i> MUT ICT Portal</h1>
+                <p>Access your events, timetables, and resources</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="tab-btn active" onclick="switchTab('login')">🔐 Login</button>
+                <button class="tab-btn" onclick="switchTab('register')">📝 Register</button>
+            </div>
+
+            <!-- Login Form -->
+            <div id="loginForm" class="auth-form">
+                <form id="loginFormElement">
+                    <div class="form-group">
+                        <label><i class="fas fa-id-card"></i> Student ID or Email</label>
+                        <input type="text" id="login_credential" required placeholder="e.g., 20240001 or student@mut.ac.za">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-key"></i> Password</label>
+                        <input type="password" id="login_password" required placeholder="Enter your password">
+                    </div>
+                    <div id="loginError" class="error-message"></div>
+                    <button type="submit" class="btn-submit"><i class="fas fa-sign-in-alt"></i> Login to Portal</button>
+                </form>
+            </div>
+
+            <!-- Register Form -->
+            <div id="registerForm" class="auth-form" style="display: none;">
+                <form id="registerFormElement">
+                    <div class="form-group">
+                        <label><i class="fas fa-id-badge"></i> Student ID *</label>
+                        <input type="text" id="reg_student_id" required placeholder="e.g., 20240001">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Full Name *</label>
+                        <input type="text" id="reg_full_name" required placeholder="e.g., Thabo Mbeki">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email Address *</label>
+                        <input type="email" id="reg_email" required placeholder="you@mut.ac.za">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> Phone Number</label>
+                        <input type="tel" id="reg_phone" placeholder="e.g., 0712345678">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-book"></i> Program</label>
+                            <select id="reg_program">
+                                <option value="">Select Program</option>
+                                <option>Diploma in IT (Extended)</option>
+                                <option>Diploma in IT</option>
+                                <option>Advanced Diploma in IT</option>
+                                <option>Communication Networks</option>
+                                <option>Software Development</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-layer-group"></i> Year Level</label>
+                            <select id="reg_year_level">
+                                <option value="1">Year 1 - Foundation</option>
+                                <option value="2">Year 2 - Intermediate</option>
+                                <option value="3">Year 3 - Advanced</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-key"></i> Password * (min. 6 characters)</label>
+                        <input type="password" id="reg_password" required placeholder="Create a strong password">
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-check-circle"></i> Confirm Password *</label>
+                        <input type="password" id="reg_confirm_password" required placeholder="Re-enter your password">
+                    </div>
+                    <div id="registerError" class="error-message"></div>
+                    <div id="registerSuccess" class="success-message"></div>
+                    <button type="submit" class="btn-submit"><i class="fas fa-user-plus"></i> Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+<footer>
+  <p>© 2026 MUT ICT Department | All Rights Reserved</p>
+  <div style="text-align: center; margin-top: 20px;">
+    <button onclick="toggleMobileView()" class="view-toggle-btn" style="background: #0055a5; color: white; border: none; padding: 10px 20px; border-radius: 40px; cursor: pointer; font-size: 14px;">
+        📱 Switch to Mobile View
+    </button>
+</div>
+</div>
+</footer>
+<script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="auth.js"></script>
+<script>
+    if (typeof toggleMobileMenu !== 'function') {
+        function toggleMobileMenu() {
+            const nav = document.getElementById('navLinks');
+            if (nav) nav.classList.toggle('active');
+        }
+    }
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                document.getElementById('navLinks')?.classList.remove('active');
+            }
+        });
+    });
+</script>
+</div>
+
+<script>
+    // API URL - Change this to your server URL
+    const API_URL = 'http://localhost:3000/api';
+
+    // ==================== HELPER FUNCTIONS ====================
+    function showToast(message, type = 'success') {
+        const existingToasts = document.querySelectorAll('.toast');
+        existingToasts.forEach(toast => toast.remove());
+        
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${message}`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+
+    // ==================== LOGIN FUNCTION (Backend API) ====================
+    async function login(credential, password) {
+        try {
+            const response = await fetch(`${API_URL}/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ login: credential, password })
+            });
+            const data = await response.json();
+            
+            if (data.success) {
+                // Store user data in session
+                sessionStorage.setItem('currentUser', JSON.stringify(data.user));
+                sessionStorage.setItem('authToken', data.token);
+                return true;
+            } else {
+                showToast(data.message, 'error');
+                return false;
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            showToast('Cannot connect to server. Make sure backend is running on port 3000', 'error');
+            return false;
+        }
+    }
+
+    // ==================== REGISTER FUNCTION (Backend API) ====================
+    async function register(userData) {
+        try {
+            const response = await fetch(`${API_URL}/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
+            });
+            const data = await response.json();
+            
+            if (data.success) {
+                return { success: true, message: data.message };
+            } else {
+                return { success: false, message: data.message };
+            }
+        } catch (error) {
+            console.error('Registration error:', error);
+            showToast('Cannot connect to server. Make sure backend is running on port 3000', 'error');
+            return { success: false, message: 'Server connection failed' };
+        }
+    }
+
+    // ==================== LOGOUT FUNCTION ====================
+    function logout() {
+        sessionStorage.removeItem('currentUser');
+        sessionStorage.removeItem('authToken');
+        showToast('Logged out successfully!', 'success');
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 1000);
+    }
+
+    // ==================== UI FUNCTIONS ====================
+    function switchTab(tab) {
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const tabs = document.querySelectorAll('.tab-btn');
+        
+        tabs.forEach(btn => btn.classList.remove('active'));
+        
+        if (tab === 'login') {
+            loginForm.style.display = 'block';
+            registerForm.style.display = 'none';
+            tabs[0].classList.add('active');
+        } else {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+            tabs[1].classList.add('active');
+        }
+    }
+
+    function toggleMobileMenu() {
+        const nav = document.getElementById('navLinks');
+        if (nav) nav.classList.toggle('active');
+    }
+
+    // ==================== CHECK LOGIN STATUS ====================
+    function checkAlreadyLoggedIn() {
+        const currentUser = sessionStorage.getItem('currentUser');
+        if (currentUser) {
+            const user = JSON.parse(currentUser);
+            showToast(`Welcome back, ${user.full_name}! Redirecting...`, 'success');
+            setTimeout(() => {
+                window.location.href = 'events.html';
+            }, 1500);
+        }
+    }
+
+    // ==================== EVENT LISTENERS ====================
+    
+    // Login form submission
+    document.getElementById('loginFormElement').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const credential = document.getElementById('login_credential').value.trim();
+        const password = document.getElementById('login_password').value;
+        const errorDiv = document.getElementById('loginError');
+        
+        errorDiv.style.display = 'none';
+        
+        if (!credential || !password) {
+            errorDiv.textContent = 'Please fill in all fields';
+            errorDiv.style.display = 'block';
+            return;
+        }
+        
+        // Show loading state
+        const submitBtn = e.target.querySelector('.btn-submit');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+        submitBtn.disabled = true;
+        
+        const success = await login(credential, password);
+        
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        
+        if (success) {
+            showToast('Login successful! Redirecting...', 'success');
+            setTimeout(() => {
+                window.location.href = 'events.html';
+            }, 1500);
+        } else {
+            errorDiv.textContent = 'Invalid Student ID/Email or Password';
+            errorDiv.style.display = 'block';
+        }
+    });
+
+    // Register form submission
+    document.getElementById('registerFormElement').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const student_id = document.getElementById('reg_student_id').value.trim();
+        const full_name = document.getElementById('reg_full_name').value.trim();
+        const email = document.getElementById('reg_email').value.trim();
+        const phone = document.getElementById('reg_phone').value.trim();
+        const program = document.getElementById('reg_program').value;
+        const year_level = document.getElementById('reg_year_level').value;
+        const password = document.getElementById('reg_password').value;
+        const confirm_password = document.getElementById('reg_confirm_password').value;
+        
+        const errorDiv = document.getElementById('registerError');
+        const successDiv = document.getElementById('registerSuccess');
+        
+        errorDiv.style.display = 'none';
+        successDiv.style.display = 'none';
+        
+        // Validation
+        if (!student_id || !full_name || !email || !password) {
+            errorDiv.textContent = 'Please fill in all required fields (*)';
+            errorDiv.style.display = 'block';
+            return;
+        }
+        
+        if (password !== confirm_password) {
+            errorDiv.textContent = 'Passwords do not match!';
+            errorDiv.style.display = 'block';
+            return;
+        }
+        
+        if (password.length < 6) {
+            errorDiv.textContent = 'Password must be at least 6 characters!';
+            errorDiv.style.display = 'block';
+            return;
+        }
+        
+        if (!email.includes('@') || !email.includes('.')) {
+            errorDiv.textContent = 'Please enter a valid email address!';
+            errorDiv.style.display = 'block';
+            return;
+        }
+        
+        if (student_id.length < 5) {
+            errorDiv.textContent = 'Please enter a valid Student ID!';
+            errorDiv.style.display = 'block';
+            return;
+        }
+        
+        // Show loading state
+        const submitBtn = e.target.querySelector('.btn-submit');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
+        submitBtn.disabled = true;
+        
+        const result = await register({ student_id, full_name, email, phone, program, year_level, password, confirm_password });
+        
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        
+        if (result.success) {
+            successDiv.textContent = result.message;
+            successDiv.style.display = 'block';
+            // Switch to login tab after 2 seconds
+            setTimeout(() => {
+                switchTab('login');
+                document.getElementById('registerFormElement').reset();
+                successDiv.style.display = 'none';
+                showToast('Account created successfully! Please login.', 'success');
+            }, 2000);
+        } else {
+            errorDiv.textContent = result.message;
+            errorDiv.style.display = 'block';
+        }
+    });
+
+    // ==================== DROPDOWN FUNCTIONALITY ====================
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach(dropdown => {
+        const link = dropdown.querySelector('a');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        if (link && menu) {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+            });
+        }
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.style.display = 'none';
+            });
+        }
+    });
+
+    // ==================== INITIALIZE ====================
+    checkAlreadyLoggedIn();
+    
+    // Expose functions to global scope for onclick handlers
+    window.switchTab = switchTab;
+    window.toggleMobileMenu = toggleMobileMenu;
+    window.logout = logout;
+</script>
+</body>
+</html>

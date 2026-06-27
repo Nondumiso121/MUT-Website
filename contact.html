@@ -1,0 +1,28 @@
+<!-- Footer -->
+<footer>
+  <p>© 2026 MUT ICT Department | All Rights Reserved</p>
+  <div style="text-align: center; margin-top: 20px;">
+    <button onclick="toggleMobileView()" class="view-toggle-btn" style="background: #0055a5; color: white; border: none; padding: 10px 20px; border-radius: 40px; cursor: pointer; font-size: 14px;">
+        📱 Switch to Mobile View
+    </button>
+</div>
+</div>
+</footer>
+<script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="auth.js"></script>
+<script>
+    if (typeof toggleMobileMenu !== 'function') {
+        function toggleMobileMenu() {
+            const nav = document.getElementById('navLinks');
+            if (nav) nav.classList.toggle('active');
+        }
+    }
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                document.getElementById('navLinks')?.classList.remove('active');
+            }
+        });
+    });
+</script>

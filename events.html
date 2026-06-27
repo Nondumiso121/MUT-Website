@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events | MUT ICT</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* Hero Section for Events */
+.hero-events {
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+              url("https://images.unsplash.com/photo-1767216490085-b01ab28e900d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzl8fElUJTIwZXZlbnRzfGVufDB8fDB8fHww");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 0 20px;
+}
+.hero-events h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+.hero-events p {
+  font-size: 1.2em;
+  max-width: 700px;
+}
+
+/* Event Cards Section */
+.cards-section {
+  margin: 30px 20px;
+  text-align: center;
+}
+.cards-section h2 {
+  color: #002147;
+  margin-bottom: 20px;
+}
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+}
+.card {
+  background: white;
+  flex: 1 1 250px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+.card h3 {
+  color: #0055a5;
+  margin-bottom: 10px;
+}
+.card p {
+  font-size: 0.95em;
+}
+.card span {
+  font-weight: bold;
+  color: #002147;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Navigation */
+nav {
+  background: #002147;
+  text-align: center;
+  padding: 12px;
+}
+nav a {
+  color: white;
+  margin: 0 12px;
+  text-decoration: none;
+  font-weight: bold;
+}
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  background: #002147;
+  color: white;
+  text-align: center;
+  padding: 25px;
+  margin-top: 30px;
+}
+
+/* Login/logout link style */
+.logout-link {
+  color: #ffaa00 !important;
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN PROTECTION SCRIPT - Added at the beginning of body -->
+<script>
+  // Check if user is logged in
+  const currentUser = sessionStorage.getItem('currentUser');
+  if (!currentUser) {
+    // Redirect to login page if not logged in
+    window.location.href = 'login.html';
+  }
+  
+  // Function to logout
+  function logoutUser() {
+    sessionStorage.removeItem('currentUser');
+    window.location.href = 'login.html';
+  }
+</script>
+
+<!-- Navigation -->
+ <header class="site-header">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="Diploma in IT Extended.html">Diploma in IT Extended</a>
+      <a href="Diploma in IT.html">Diploma in IT</a>
+      <a href="Advanced Diploma in IT.html">Advanced Diploma in IT</a>
+      <a href="bursaries.html">Bursaries</a>
+      <a href="events.html">Events</a>
+      <a href="timetables.html">Timetables</a>
+      <a href="#" onclick="logoutUser()" class="logout-link">Logout</a>
+    </nav>
+ </header>
+
+<!-- Hero Section -->
+<section class="hero-events">
+  <div>
+    <h1>ICT Department Events</h1>
+    <p>Stay updated with our academic and student life events hosted throughout the year at MUT ICT Department.</p>
+  </div>
+</section>
+
+<!-- Events Cards -->
+<section class="cards-section">
+  <h2>Upcoming Events</h2>
+  <div class="cards-container">
+    <div class="card">
+      <h3>Registration Day</h3>
+      <span>January</span>
+      <p>All new students register for programs and orientation sessions to start their academic year smoothly.</p>
+    </div>
+    <div class="card">
+      <h3>Freshers Party</h3>
+      <span>February</span>
+      <p>Welcome event for first-year students to socialize, network, and experience campus life.</p>
+    </div>
+    <div class="card">
+      <h3>Tech Innovation Day</h3>
+      <span>March</span>
+      <p>Showcase of student projects, IT innovations, and workshops to enhance technological skills.</p>
+    </div>
+    <div class="card">
+      <h3>Career Fair</h3>
+      <span>June</span>
+      <p>Meet potential employers, explore internship opportunities, and learn about industry trends.</p>
+    </div>
+    <div class="card">
+      <h3>Hackathon</h3>
+      <span>August</span>
+      <p>Collaborative coding event where students develop IT solutions within a limited timeframe.</p>
+    </div>
+    <div class="card">
+      <h3>Graduation Day</h3>
+      <span>November</span>
+      <p>Celebrate student achievements with the formal graduation ceremony and awards.</p>
+    </div>
+    <div class="card">
+      <h3>Graduation Showcase</h3>
+      <span>November</span>
+      <p>Students present their final-year projects to peers, faculty, and potential employers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2026 MUT ICT Department | All Rights Reserved</p>
+  <div style="text-align: center; margin-top: 20px;">
+    <button onclick="toggleMobileView()" class="view-toggle-btn" style="background: #0055a5; color: white; border: none; padding: 10px 20px; border-radius: 40px; cursor: pointer; font-size: 14px;">
+        📱 Switch to Mobile View
+    </button>
+</div>
+</div>
+</footer>
+<script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="auth.js"></script>
+<script>
+    if (typeof toggleMobileMenu !== 'function') {
+        function toggleMobileMenu() {
+            const nav = document.getElementById('navLinks');
+            if (nav) nav.classList.toggle('active');
+        }
+    }
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                document.getElementById('navLinks')?.classList.remove('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>
